@@ -23,6 +23,13 @@ describe NetSuite::Records::CreditMemoItem do
     end
   end
 
+  it 'can initialize from a record' do
+    record = NetSuite::Records::CreditMemoItem.new(:amount => 123)
+    item   = NetSuite::Records::CreditMemoItem.new(record)
+    expect(item).to be_kind_of(NetSuite::Records::CreditMemoItem)
+    expect(item.amount).to eql(123)
+  end
+
   describe '#options' do
     it 'can be set from attributes'
     it 'can be set from a CustomFieldList object'
