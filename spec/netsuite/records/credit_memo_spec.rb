@@ -30,6 +30,26 @@ describe NetSuite::Records::CreditMemo do
     end
   end
 
+  describe '#custom_field_list' do
+    it 'can be set from attributes' do
+      attributes = {
+        :custom_field => {
+          :amount => 10,
+          :internal_id => 'custfield_amount'
+        }
+      }
+      memo.custom_field_list = attributes
+      expect(memo.custom_field_list).to be_kind_of(NetSuite::Records::CustomFieldList)
+      expect(memo.custom_field_list.custom_fields.length).to eql(1)
+    end
+
+    it 'can be set from a CustomFieldList object' do
+      custom_field_list = NetSuite::Records::CustomFieldList.new
+      memo.custom_field_list = custom_field_list
+      expect(memo.custom_field_list).to eql(custom_field_list)
+    end
+  end
+
   describe '#item_list' do
     it 'can be set from attributes' do
       attributes = {
